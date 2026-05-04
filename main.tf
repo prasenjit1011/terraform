@@ -43,11 +43,11 @@ resource "aws_s3_bucket_policy" "public_read" {
 }
 
 resource "aws_s3_object" "files" {
-  for_each = fileset(".", "*.html")
+  for_each = fileset(path.module, "*.html")
 
   bucket = aws_s3_bucket.website.id
   key    = each.value
-  source = each.value
+  source = "${path.module}/${each.value}"
 
-  etag = filemd5(each.value)
+  etag = filemd5("${path.module}/${each.value}")
 }
