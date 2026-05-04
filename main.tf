@@ -42,11 +42,12 @@ resource "aws_s3_bucket_policy" "public_read" {
   })
 }
 
-resource "aws_s3_object" "index" {
-  bucket       = aws_s3_bucket.website.id
-  key          = "index.html"
-  source       = "index.html"
-  content_type = "text/html"
+resource "aws_s3_object" "files" {
+  for_each = fileset(".", "*.html")
 
-  etag = filemd5("index.html")  # 🔥 THIS LINE FIXES YOUR ISSUE
+  bucket = aws_s3_bucket.website.id
+  key    = each.value
+  source = each.value
+
+  etag = filemd5(each.value)
 }
