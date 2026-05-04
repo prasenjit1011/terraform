@@ -1,10 +1,61 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>My Terraform Site</title>
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+         .display-flex{
+            background-color: rgb(50, 50, 50);
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: 70px;
+            align-items: center;
+        }
+
+        .super{
+            display: block;
+            padding: 20px 25px;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .super:hover {
+            background-color: black;
+        }
+        .sup{
+            color:rgb(200, 200, 200);
+            font-size:x-large;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .sup:hover {
+            background-color: rgb(175, 175, 175);
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello from Terraform 🚀</h1>
-  <p>This is my static website hosted on AWS S3</p>
+
+    <ul class="display-flex">
+        <li><a class="super" href="index.html">Home</a></li>
+        <li><a class="super" href="about.html">About</a></li>
+    </ul>
+
+    <h1 style="text-transform:capitalize;font-family:cursive;text-align: center;">home</h1>
+    <p style="text-transform:capitalize;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;border-style:solid;border-radius:15px;border-width: 1px;padding:10px">Welcome to a space where ideas turn into real, usable solutions. Whether you're building something from scratch or improving what already exists, this platform is designed to help you move faster and think clearer. We focus on simplicity without sacrificing power, giving you tools that feel intuitive while still handling complex needs behind the scenes. From seamless user experiences to scalable architecture, every detail is crafted to support growth and efficiency. Here, innovation isn’t just a buzzword—it’s part of the process, guiding how features are built and how problems are solved. We believe that technology should work for you, not slow you down, so everything is optimized to be reliable, flexible, and easy to adapt as your needs evolve. As you explore, you’ll find a balance of performance and design that helps you stay focused on what truly matters: creating value, delivering results, and turning your vision into something tangible.</p>
+    <h1 style="text-decoration: underline;text-transform: capitalize;font-family:cursive";>Choose One Of The Following:</h1>
+    <ul style="gap:20px;list-style:none;padding:0;margin:0;background-color:rgb(255,255,255)">
+        <li><a class="sup" href="Learn.html">YouTube</a></li>
+        <li><a class="sup" href="learn.html">Instagram</a></li>
+        <li><a class="sup" href="learn.html">Facebook</a></li>
+        <li><a class="sup" href="learn.html">LinkedIn</a></li>
+        <li><a class="sup" href="learn.html">Reddit</a></li>
+        <li><a class="sup" href="learn.htmlTwitter</a></li>
+    </ul>
 </body>
 </html>
