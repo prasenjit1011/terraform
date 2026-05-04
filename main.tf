@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = "my-terraform-static-site-12345" # change to unique name
+  bucket = "my-terraform-cavfddh-dummy" # change to unique name
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
