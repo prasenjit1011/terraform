@@ -50,4 +50,9 @@ resource "aws_s3_object" "files" {
   source = "${path.module}/${each.value}"
 
   etag = filemd5("${path.module}/${each.value}")
+  content_type = "text/html"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
