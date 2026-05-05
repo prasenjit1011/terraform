@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "website" {
 }
 
 # -----------------------------
-# Enable Static Website Hosting
+# Website Hosting
 # -----------------------------
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website.id
@@ -25,7 +25,7 @@ resource "aws_s3_bucket_website_configuration" "website" {
 }
 
 # -----------------------------
-# Public Access Settings
+# Public Access Block (ALLOW PUBLIC)
 # -----------------------------
 resource "aws_s3_bucket_public_access_block" "public" {
   bucket = aws_s3_bucket.website.id
@@ -48,7 +48,6 @@ resource "aws_s3_bucket_policy" "public_read" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid       = "PublicReadGetObject",
         Effect    = "Allow",
         Principal = "*",
         Action    = "s3:GetObject",
@@ -59,17 +58,7 @@ resource "aws_s3_bucket_policy" "public_read" {
 }
 
 # -----------------------------
-# Bucket ACL
-# -----------------------------
-resource "aws_s3_bucket_acl" "acl" {
-  depends_on = [aws_s3_bucket_public_access_block.public]
-
-  bucket = aws_s3_bucket.website.id
-  acl    = "public-read"
-}
-
-# -----------------------------
-# Content Type Mapping
+# Content Types
 # -----------------------------
 locals {
   content_types = {
@@ -81,19 +70,21 @@ locals {
     jpeg = "image/jpeg"
     svg  = "image/svg+xml"
   }
+
+  site_files = fileset("${path.module}/website", "**")
 }
 
 # -----------------------------
-# Upload Files
+# Upload Files (FIXED)
 # -----------------------------
 resource "aws_s3_object" "files" {
-  for_each = fileset(path.module, "**")
+  for_each = { for file in local.site_files : file => file }
 
   bucket = aws_s3_bucket.website.id
   key    = each.value
-  source = "${path.module}/${each.value}"
+  source = "${path.module}/website/${each.value}"
 
-  etag = filemd5("${path.module}/${each.value}")
+  etag = filemd5("${path.module}/website/${each.value}")
 
   content_type = lookup(
     local.content_types,
